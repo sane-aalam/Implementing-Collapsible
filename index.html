@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 12px solid black;
+      }
+      .collHideShowClass {
+        background-color: gray;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .active,
+      .collHideShowClass:hover {
+        background-color: #555;
+      }
+
+      .content {
+        padding: 0 18px;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+      }
+      #fixed-heading-tag {
+        text-decoration: underline;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="fixed-heading-tag">Open And Close Feature</h2>
+    <div class="main-container">
+      <button type="button" class="collHideShowClass">Div Section 1</button>
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <button type="button" class="collHideShowClass">Div Section 2</button>
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <button type="button" class="collHideShowClass">Div Section 3</button>
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <button type="button" class="collHideShowClass">Div Section 4</button>
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+    </div>
+    <script>
+      // Appraoch-1 Using simple Itraversaling way
+      // breakdown the problem statement
+      //   1- When you go next index -> currentIndex off -> nextIndex ON (click)
+
+      function workingFunction(index) {
+        collShow[index].addEventListener("click", function () {
+          this.classList.toggle("active");
+          let content = this.nextElementSibling;
+          console.log(content);
+          if (content.style.display === "block") {
+            content.style.display = "none";
+            // When first Closed Then we can oppen Next Index Tab - By defaul
+            // first tab close index 0 -> Then open index 0 + 1 = 1 tab
+            // second tab close index 1 -> Then open index 1 + 1 = 2 tab
+            let NextTabIndex = index + 1;
+            console.log(NextTabIndex);
+            if (NextTabIndex == 4) {
+              alert("you have reached out of boundary of the div");
+            }
+            collShow[NextTabIndex].click(); // alredy click
+          } else {
+            content.style.display = "block";
+          }
+        });
+      }
+
+      var collShow = document.getElementsByClassName("collHideShowClass");
+
+      for (let i = 0; i < collShow.length; i++) {
+        workingFunction(i);
+      }
+
+      // by default click the first the button
+      collShow[0].click();
+    </script>
+  </body>
+</html>
